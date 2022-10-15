@@ -1,11 +1,16 @@
-```{r}
-read.csv('education.csv')
-read.csv('unemployment.csv')
-read.csv('UIC_codes.csv')
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(tidyverse)
+unemployment <- read_csv('unemployment.csv')
+education <- read_csv('education.csv')
 ```
+``` {r}
+#clean up education columsn to only 2000s+ yrs
+education <- education[,c(1:7,33:47)]
 
-```{r}
-education <-education[,c(1:7,33:47)]
-
+#
 unemploy_edu <- merge(education, unemployment, by.x = "FIPS Code", by.y = "FIPS_Code")
 ```
