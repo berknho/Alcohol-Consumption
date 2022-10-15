@@ -4,13 +4,6 @@ library(dplyr)
 library(lubridate)
 library(ggplot2)
 library(tidyverse)
-unemployment <- read_csv('unemployment.csv')
-education <- read_csv('education.csv')
-```
-``` {r}
-#clean up education columsn to only 2000s+ yrs
-education <- education[,c(1:7,33:47)]
-
-#merge unemployment with education data by shared FIPS Code and State
-un_edu <- merge(education, unemployment, by.x = c("State", "FIPS Code"), by.y = c("State", "FIPS_Code"))
+por <- read_csv('student-por.csv')
+mat <- read_csv('student-mat.csv')
 ```
