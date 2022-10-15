@@ -1,3 +1,2 @@
-```{r}
-read.csv("UIC_codes.csv.html")
-```
+read.csv('education.csv')
+read.csv('unemployment.csv')
