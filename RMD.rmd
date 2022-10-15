@@ -6,4 +6,6 @@ read.csv('UIC_codes.csv')
 
 ```{r}
 education2 <-education[,c(1:7,33:47)]
+
+unemploy_edu <- merge(education, unemployment, by.x = "FIPS Code", by.y = "FIPS_Code")
 ```
