@@ -11,6 +11,6 @@ education <- read_csv('education.csv')
 #clean up education columsn to only 2000s+ yrs
 education <- education[,c(1:7,33:47)]
 
-#
-unemploy_edu <- merge(education, unemployment, by.x = "FIPS Code", by.y = "FIPS_Code")
+#merge unemployment with education data by shared FIPS Code and State
+un_edu <- merge(education, unemployment, by.x = c("State", "FIPS Code"), by.y = c("State", "FIPS_Code"))
 ```
