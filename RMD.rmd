@@ -3,3 +3,7 @@ read.csv('education.csv')
 read.csv('unemployment.csv')
 read.csv('UIC_codes.csv')
 ```
+
+```{r}
+education2 <-education[,c(2:7,33:47)]
+```
