@@ -5,5 +5,5 @@ read.csv('UIC_codes.csv')
 ```
 
 ```{r}
-education2 <-education[,c(2:7,33:47)]
+education2 <-education[,c(1:7,33:47)]
 ```
