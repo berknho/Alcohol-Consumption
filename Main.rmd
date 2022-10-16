@@ -5,5 +5,100 @@ library(lubridate)
 library(ggplot2)
 library(tidyverse)
 por <- read_csv('student-por.csv')
-mat <- read_csv('student-mat.csv')
 ```
+
+## **Introduction**
+Alcohol consumption is often prominent among young adults. This dataset has the rating of different populations (1 being very low and 5 indicating very high)
+on weekdays and weekends. The rating is compared against other variables such as sex, age, romantic status, and location (rural vs. urban) to see if there’s any correlation. This 
+Data is from Portugal where the legal drinking age is 18. 
+
+``` {r}
+
+```
+
+```{r}
+###### TABLES #######
+
+##### Difference by sex #####
+
+#grouped bar chart for sex by weekday
+ggplot(por, aes(fill=sex, x=Dalc)) +
+  geom_bar(position="dodge")
+
+#grouped bar chart for sex by weekend
+ggplot(por, aes(fill=sex, x=Walc)) +
+  geom_bar(position="dodge")
+
+#table by gender for weekday
+Dgender <- aggregate(por[,27],by=list(por$sex),FUN=mean, na.rm=TRUE)
+
+#table by gender for weekend
+Wgender <- aggregate(por[,28],by=list(por$sex),FUN=mean, na.rm=TRUE)
+```
+
+The two tables above show that men tend to have a higher rating than women. This is probably due to the fact that men have been more peer pressured into drinking and 
+historically speaking, women were prohibited from alcohol in some religions. Additionally, alcohol tends to have a more significant impact on women’s health such as hormonal 
+imbalance and pregnancy issues despite the amount they consume relative to men. 
+
+
+```{r}
+##################
+#### ADDRESS #####
+##################
+
+#grouped bar chart for sex by weekday
+ggplot(por, aes(fill=address, x=Dalc)) +
+  geom_bar(position="dodge")
+
+#grouped bar chart for sex by weekend
+ggplot(por, aes(fill=address, x=Walc)) +
+  geom_bar(position="dodge")
+
+#table by location
+Dlocation <- aggregate(por[,27],by=list(por$address),FUN=mean,na.rm=TRUE)
+
+#table by location
+Wlocation <- aggregate(por[,28],by=list(por$address),FUN=mean,na.rm=TRUE)
+```
+
+Since the two tables above show that there is not a significant difference in the mean rating for rural and urban populations, we can look at the graphs to see the overall
+trend. 
+
+For both rural and urban populations, there is a tendency to drink less in general (weekdays and weekends) based on the graph. The table shows that rural has a slightly higher mean rating, but on a holistic scale, the difference in their rating is marginal. 
+
+
+```{r}
+##############################
+#### Relationship Status #####
+##############################
+
+#stacked proportion bar chart by Dalc
+ggplot(por, aes(x=Dalc, fill=romantic), na.rm=TRUE) + 
+  geom_bar(position='fill', na.rm=TRUE)
+
+#stacked proportion bar chart by Walc
+ggplot(por, aes(x=Walc, fill=romantic), na.rm=TRUE) + 
+  geom_bar(position='fill', na.rm=TRUE)
+
+#table by relationship for weekdays
+Dromantic <- aggregate(por[,27],by=list(por$romantic),FUN=mean,na.rm=TRUE)
+
+#table by relationship for weekends
+Wromantic <- aggregate(por[,28],by=list(por$romantic),FUN=mean,na.rm=TRUE)
+```
+
+People in a romantic relationship have a higher rating on the weekdays unlike on the weekends when people not in a committed relationship tend to have a higher rating. 
+For people not in a relationship, they probably have more time on the weekends and like to keep alcohol consumption separate from their work and daily life. 
+
+
+```{r}
+#table by age mean drinking on weekdays
+Dage <- aggregate(por[,27],by=list(por$age),FUN=mean,na.rm=TRUE)
+Dage
+
+#table by age mean drinking on weekends
+Wage <- aggregate(por[,28],by=list(por$age),FUN=mean,na.rm=TRUE)
+Wage
+```
+At first glance, the tables show that 21-22 year olds have the highest average rating. However, when looking closer at the data set, these values can be labeled as outliers because
+there are only 1-2 observations in that age category. After taking those into account, 19 year olds have a higher rating on weekdays while 20 year olds have a higher rating on weekends. This is probably due to the fact that 19 year olds are typically college freshmen, so they are excited to try alcohol and have more time throughout the week to participate in it whereas 20 year olds have a more intense workload and have already had the experience so they aren’t as interested. 
